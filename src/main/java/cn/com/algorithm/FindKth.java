@@ -87,15 +87,16 @@ public class FindKth {
      * @param array
      * @return
      */
-    private Integer getMedianNum(List<Integer> array) {
+    public Integer getMedianNum(List<Integer> array) {
         List<Integer> arrayList = new ArrayList<>(array.size());
         arrayList.addAll(array);
         Integer medianNum;
         switch (arrayList.size()) {
-            case 0:
             case 1:
-            case 2:
                 medianNum = arrayList.get(0);
+                break;
+            case 2:
+                medianNum = arrayList.get(0) < arrayList.get(1)?arrayList.get(0):arrayList.get(1);
                 break;
             case 3:
                 medianNum = getMedianFrom3Num(arrayList);
@@ -130,7 +131,7 @@ public class FindKth {
         swapIfLowThan(arrayList, 1, 4);
         swapIfLowThan(arrayList, 1, 2);
         swapIfLowThan(arrayList, 2, 4);
-        medianNum = arrayList.get(1);
+        medianNum = arrayList.get(2);
         return medianNum;
     }
 
