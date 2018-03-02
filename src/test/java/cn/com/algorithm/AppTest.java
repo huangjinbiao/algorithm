@@ -13,6 +13,46 @@ import java.util.List;
  */
 public class AppTest  extends TestCase {
 
+    /**二维数组中找峰值*/
+    @Test
+    public void testFindPeakBaseTwoDimensional(){
+
+        int[][] arr = new int[][]{
+                {10,8,10,10},
+                {14,13,12,11},
+                {15,9,11,21},
+                {16,17,19,20}
+        };
+        findPeakBase2DimensionalInternal(arr,21);
+
+        arr = new int[][]{
+                {10,8,10,10}
+        };
+        findPeakBase2DimensionalInternal(arr,10);
+
+        arr = new int[][]{
+                {10},
+                {20},
+                {100},
+        };
+        findPeakBase2DimensionalInternal(arr,100);
+    }
+
+    private void findPeakBase2DimensionalInternal(int[][] arr,int expectPeakValue) {
+        FindPeak fp = new FindPeak();
+        int peak = fp.findAPeakBaseTwoDimensional(arr,arr[0].length/2);
+        Assert.assertTrue(peak == expectPeakValue );
+    }
+
+    /**一维数组中找峰值*/
+    @Test
+    public void testFindPeakBaseOneDimensional(){
+        testFindPeakBase1DimensionalInternal(getCustomerArray(1),1);
+        testFindPeakBase1DimensionalInternal(getCustomerArray(1,2),2);
+        testFindPeakBase1DimensionalInternal(getCustomerArray(6,7,4,3,2,1,4,5),7);
+    }
+
+    /**中位数的中位数*/
     @Test
     public void  testFindMedianOfMedian(){
         //1个数
@@ -79,5 +119,9 @@ public class AppTest  extends TestCase {
         Assert.assertTrue(String.format("median of median of %s member of array wrong",arr.size()),ret == median);
     }
 
-
+    private void testFindPeakBase1DimensionalInternal(List<Integer> customerArray, int peak) {
+        FindPeak findPeak = new FindPeak();
+        int ret = findPeak.findAPeakBaseOneDimensional(customerArray);
+        Assert.assertTrue("find peak wrong",ret == peak);
+    }
 }
